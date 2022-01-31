@@ -48,7 +48,63 @@
     - But,
       - 높은 러닝 커브
         - JPA를 잘쓰려면 객체지향 프로그래밍과 관계형 데이터베이스 둘다 이해해야 하기 때문에 실무에서 잘 사용하지 못한다.
-  
+  - 아키텍처 구조 
+    - Controller
+      - 웹 계층
+    - Service
+      - 비즈니스 로직, 트랜잭션 처리
+    - Repository
+      - JPA로 DB에 직접 접근하는 계층
+    - Domain
+      - 엔티티가 모여있는 계층 (모든 계층에서 사용)
+    - 개발순서, 특징
+      - Domain
+      - Repository
+        - JpaRepository<Entity 클래스, PK타입>을 상속하면 기본 CRUD 메소드 자동으로 생성
+        - Entity Repository와 함께 위치해야한다.
+      - Service
+      - Controller
+  - application.properties
+    - 스프링 부트가 자동으로 로딩하게 되는 규약들
+    - key-value 형식으로 값을 정의하면 애플리케이션에서 참조하여 사용할 수 있다.
+    ```
+    my.name = sa46lll
+    
+    > app 
+    @Value("${my.name}")
+    String name;
+    ```
+
+    
+  - Note (code)
+    - Entity 클래스에서는 절대 Setter 메소드를 만들지 않는다.
+      - 대신, 해당 필드의 값 변경이 필요하면 명확히 목적과 의도를 나타낼 수 있는 메소드를 추가해야 한다.
+      ```
+      public class Order{
+          public void cancelOrder(){
+              this.status = false;
+         }
+      }
+      
+      public void 주문서비스의_취소이벤트(){
+          order.cancelOrder();
+      }
+      ```
+      
+    - Builder
+      - 어느 필드에 어떤 값을 패워야할지 명확하게 인지할 수 있다.
+      ```
+      Example.builder()
+          .a(a)
+          .b(b)
+          .build();
+      ```
+    
+      
+    
+
+
+
   
   
 
