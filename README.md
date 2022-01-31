@@ -67,19 +67,25 @@
   - application.properties
     - 스프링 부트가 자동으로 로딩하게 되는 규약들
     - key-value 형식으로 값을 정의하면 애플리케이션에서 참조하여 사용할 수 있다.
-    ```
+    ```java
     my.name = sa46lll
     
     > app 
     @Value("${my.name}")
     String name;
     ```
+  - 등록/수정/조회 API 생성
+    - 준비물
+      - Request 데이터를 받을 Dto
+      - API 요청을 받을 Controller
+      - 트랜잭션, 도메인 기능 간의 순서를 보장하는 Service
+        - Service에서는 트랜잭션, 도메인 간 순서 보장의 역활. (비즈니스 로직은 Domain에서 처리)
 
     
   - Note (code)
     - Entity 클래스에서는 절대 Setter 메소드를 만들지 않는다.
       - 대신, 해당 필드의 값 변경이 필요하면 명확히 목적과 의도를 나타낼 수 있는 메소드를 추가해야 한다.
-      ```
+      ```java
       public class Order{
           public void cancelOrder(){
               this.status = false;
@@ -90,10 +96,9 @@
           order.cancelOrder();
       }
       ```
-      
     - Builder
       - 어느 필드에 어떤 값을 패워야할지 명확하게 인지할 수 있다.
-      ```
+      ```java
       Example.builder()
           .a(a)
           .b(b)
