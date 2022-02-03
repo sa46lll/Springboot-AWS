@@ -4,8 +4,12 @@
 > 테스트 코드
 - Junit assertThat
 - assertj assertThat
-    - CoreMatchers와 달리 추가적으로 라이브러리가 필요하지 않다.
-    - 자동완성이 좀 더 확실하게 지원된다.
+  - CoreMatchers와 달리 추가적으로 라이브러리가 필요하지 않다.
+  - 자동완성이 좀 더 확실하게 지원된다.
+- @WebMvcTest
+- @SpringBootTest, TestRestTemplate
+  - JPA 기능까지 한번에 테스트
+  
 
 > JPA
 - 배경
@@ -28,10 +32,10 @@
   
 
 - JPA
-  - 역활
+  - **역활**
     - 관계형 데이터베이스에 맞게 SQL을 대신해서 실행
     - 객체 중심 개발 -> 생산성 향상, 유지보수 유리
-  - Spring Data JPA
+  - **Spring Data JPA**
     - Spring에서 JPA의 구현체들을 직접 다루지 않고 더 쉽게 사용하고자 추상화시킨 Spring Data JPA 모듈을 사용
     - JPA <- Hibernate <- Spring Data JPA
     - 장점
@@ -48,7 +52,7 @@
     - But,
       - 높은 러닝 커브
         - JPA를 잘쓰려면 객체지향 프로그래밍과 관계형 데이터베이스 둘다 이해해야 하기 때문에 실무에서 잘 사용하지 못한다.
-  - 아키텍처 구조 
+  - **아키텍처 구조**
     - Controller
       - 웹 계층
     - Service
@@ -57,14 +61,24 @@
       - JPA로 DB에 직접 접근하는 계층
     - Domain
       - 엔티티가 모여있는 계층 (모든 계층에서 사용)
-    - 개발순서, 특징
-      - Domain
-      - Repository
-        - JpaRepository<Entity 클래스, PK타입>을 상속하면 기본 CRUD 메소드 자동으로 생성
-        - Entity Repository와 함께 위치해야한다.
-      - Service
-      - Controller
-  - application.properties
+  - **개발순서, 특징**
+    - Domain
+      - 데이터베이스와 맞닿은 핵심 클래스 (테이블 생성, 스키마 변경)
+    - Repository
+      - JpaRepository<Entity 클래스, PK타입>을 상속하면 기본 CRUD 메소드 자동으로 생성
+      - Entity Repository와 함께 위치해야한다.
+    - Service
+      - 트랜잭션과 도메인 간의 순서만 보장
+      - Bean 주입 받는 방식 3가지
+        - @Autowired
+        - setter
+        - 생성자 (권장)
+          - RequiredArgsConstructor
+            - 해당 클래스의 의존성 관계가 변경될 때마다 생성자 코드를 계속해서 수정하는 번거로움 해결
+    - Controller
+      - 결괏값으로 여러 테이블을 조인해서 줘야 할 경우가 빈번
+        - Dto를 분리해서 사용 (Entity 클래스 X)
+  - **application.properties**
     - 스프링 부트가 자동으로 로딩하게 되는 규약들
     - key-value 형식으로 값을 정의하면 애플리케이션에서 참조하여 사용할 수 있다.
     ```java
@@ -74,7 +88,7 @@
     @Value("${my.name}")
     String name;
     ```
-  - 등록/수정/조회 API 생성
+  - **등록/수정/조회 API 생성**
     - 준비물
       - Request 데이터를 받을 Dto
       - API 요청을 받을 Controller
