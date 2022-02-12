@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor                                          // 기본 생성자 자동 추가 == public Posts(){}
 @Entity                                                     // 테이블과 링크될 클래스임을 나타냄. (주로 카멜케이스 표기법 SalesManager.java -> sales_manager table)
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // PK 생성 규칙 (스프링부트 2.0에서는 IDENTITY 옵션을 추가해야만 auto_increment 적용)
