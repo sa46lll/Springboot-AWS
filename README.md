@@ -161,7 +161,15 @@
   - 특징
     - 앞의 경로와 뒤의 파일 확장자는 자동으로 지정
       - 앞: src/main/resources/templates
-      - 확장자: .mustache 
+      - 확장자: .mustache
+  - 프론트엔드 라이브러리 사용 방법
+    - 외부 CDN
+    - 직접 라이브러리를 받아서 사용
+  - HTML
+    - css는 header에, js는 footer에
+      - HTML은 위에서부터 코드가 실행되기 때문에 head가 다 실행되고서 body가 실행
+      - 즉, head가 다 불러지지 않으면 사용자 쪽에선 백지 화면만 노출되므로
+      - js 용량이 클수록 body 부분의 실행이 늦어지기 때문에 js는 body 하단에 두어 화면이 다 그려진 뒤에 호출하는 것이 좋음.
   
       
     
