@@ -225,7 +225,11 @@
       - Redis, Memcached와 같은 메모리 DB
         - B2C 서비스에서 가장 많이 사용하는 방식
         - 실제 서비스로 사용하기 위해서는 Embedded Redis와 같은 방식이 아닌 외부 메모리 서버가 필요함.
-    - 
+  - 전체 테스트
+    - 실패 이유
+      - test 디렉토리에 application.properties가 없으면 main 설정을 그대로 가져옴.
+      - but, application-oauth.properties는 가져오는 파일이 아니기 때문.
+        - 그래서 가짜 설정값을 입력해주자.
   
             
 
