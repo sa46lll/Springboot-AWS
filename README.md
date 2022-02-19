@@ -199,6 +199,7 @@
     - spring-security-oauth2-autoconfigure 라이브러리
       - 스프링 부트 1.5에서 쓰던 설정을 2에서도 그대로 사용 가능
     - **Spring Security Oauth2 Client 라이브러리**
+      - 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
       - 장점
         - 스프링 부트용 라이브러리(starter) 출시
         - 확장 포인트를 고려해서 설계됨
@@ -212,6 +213,7 @@
   - Enum 클래스 (Role)
     - 스프링 시큐리티에서는 권한 코드에 항상 ROLE_이 앞에 있어야만 함.
       - ROLE_GUEST, ROLE_USER 등
+  
             
 
 
