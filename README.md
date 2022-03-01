@@ -230,7 +230,22 @@
       - test 디렉토리에 application.properties가 없으면 main 설정을 그대로 가져옴.
       - but, application-oauth.properties는 가져오는 파일이 아니기 때문.
         - 그래서 가짜 설정값을 입력해주자.
-  
+      - MockMvcTest
+        - Controller, ControllerAdvice 등 만을 읽는다. (Repository, Service, Component X)
+          - 그래서 어노테이션에 스캔 대상에서 제외해주자 (excludeFilters)
+          - @EnableJpaAuditing가 @SpringBootApplication와 함께 있다보니 스캔대상에 포함
+            - JpaConfig를 생성하여 @EnableJpaAuditing를 분리해주자
+
+> AWS 서버 환경
+
+외부에서 본인이 만든 서비스에 접근하려면 **24시간 작동하는 서버**가 필요
+- 집에 PC를 24시간 구동
+- 호스팅 서비스 이용 (Cafe 24, 코리아호스팅 등)
+  - 비용면에서 저렴
+- 클라우드 서비스 이용 (AWS, ASURE, GCP 등)
+  - 특정 시간에만 트래픽이 몰린다면 유동적으로 사양을 늘릴 수 있는 클라우드가 유리
+  - 단순히 EC2와 같은 서버 장비를 대여하는 것 뿐만 아니라 그 안의 로그 관리, 모니터링, 하드웨어 교체, 네트워크 관리 등을 기본적으로 지원
+  - 
             
 
 
